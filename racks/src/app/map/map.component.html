@@ -1,10 +1,37 @@
+<div class="left-menu">
+    <form #directionsForm="ngForm"
+          (ngSubmit)="onSubmit()">
+        <mat-form-field class="full-width">
+            <input matInput required
+                   type="text"
+                   placeholder="Origin"
+                   [(ngModel)]="origin"
+                   name="origin">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text"
+                   placeholder="Closest Trail Head"
+                   [(ngModel)]="trail" name="trail">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput type="text"
+                   required
+                   placeholder="Destination"
+                   [(ngModel)]="destination" name="destination">
+        </mat-form-field>
+        <button mat-raised-button type="submit">GO</button>
+    </form>
+    <div #myPanel class="direction-panel"></div>
+</div>
 <div class="map-container">
-    <agm-map [latitude]="lat"
-             [longitude]="lng"
+    <agm-map [latitude]="myPos?.lat"
+             [longitude]="myPos?.lng"
              [zoom]="zoom">
-        <agm-direction [origin]="dir.origin"
+        <agm-direction *ngIf="dir"
+                       [origin]="dir.origin"
                        [destination]="dir.destination"
-                       [travelMode]="'BICYCLING'"
+                       [waypoints]="[{ location: dir.trail, stopover: false }]"
+                       [travelMode]="travelMode"
                        [provideRouteAlternatives]="true"
                        [avoidHighways]="true"
                        [panel]="myPanel"></agm-direction>
@@ -17,5 +44,4 @@
         </agm-polyline>
         -->
     </agm-map>
-    <div #myPanel class="direction-panel"></div>
 </div>

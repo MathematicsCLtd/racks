@@ -1,3 +1,20 @@
+.left-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 355px;
+  height: 100%;
+  padding: 2px;
+  overflow-y: auto;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  z-index: 99;
+
+  .full-width {
+    width: 100%;
+  }
+}
+
 .map-container {
   position: fixed;
   overflow: hidden;

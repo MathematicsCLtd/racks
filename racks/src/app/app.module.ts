@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule,
+         MatButtonModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +23,10 @@ import { constants } from './common/constants';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
     AgmCoreModule.forRoot({
       apiKey: constants.gmapApiKey
     }),

@@ -7,25 +7,58 @@ import { GmapService } from '../services/gmap.service';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-  lat: number = 39.959770;
-  lng: number = -83.000412;
-  address: string = 'Easton Town Center, Easton Town Center, Columbus, OH';
+  myPos: any = { lat: 0, lng: 0 };
+  origin: string;
+  trail: string;
+  destination: string;
   dir: any = {
-    origin: { lat: this.lat, lng: this.lng },
-    destination: { lat: 40.1475513, lng: -82.9550197 }
+    origin: {},
+    trail: {},
+    destination: {}
   };
-  zoom: number = 13;
+  zoom: number = 14;
+  travelMode: string = 'BICYCLING';
+  //travelMode: string = 'TRANSIT';
 
   constructor(private gmap: GmapService) { }
 
   ngOnInit() {
-    let destiny = this.getCoordinates();
+    this.getLocation();
+    this.origin = '';
+    this.trail = '';
+    this.destination = '';
   }
 
-  getCoordinates() {
-    this.gmap.getCoordinates(this.address).subscribe(ret => {
-      console.log(ret);
-      this.dir.destination = ret.results[0].geometry.location;
+  onSubmit() {
+    let request = {
+      origin: this.origin,
+      trail: this.trail,
+      destination: this.destination
+    };
+    this.getCoordinates(request);
+  }
+
+  getCoordinates(req) {
+    Object.keys(req).forEach(key => {
+      this.gmap.getCoordinates(req[key]).subscribe(ret => {
+        if (ret.results) {
+          this.dir[key] = ret.results[0].geometry.location;
+        } else {
+          console.log(ret);
+        }
+      });
     });
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+        this.myPos.lat = position.coords.latitude;
+        this.myPos.lng = position.coords.longitude;
+      })
+    } else {
+      console.log('Geoposition not supported');
+    }
   }
 }

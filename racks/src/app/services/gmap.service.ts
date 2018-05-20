@@ -13,7 +13,6 @@ export class GmapService {
 
   getCoordinates(address: string) {
     let url = this.apiUrl + address;
-
     return this.http.get(url);
   }
 }
