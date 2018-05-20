@@ -1,0 +1,21 @@
+<div class="map-container">
+    <agm-map [latitude]="lat"
+             [longitude]="lng"
+             [zoom]="zoom">
+        <agm-direction [origin]="dir.origin"
+                       [destination]="dir.destination"
+                       [travelMode]="'BICYCLING'"
+                       [provideRouteAlternatives]="true"
+                       [avoidHighways]="true"
+                       [panel]="myPanel"></agm-direction>
+        <!--
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        <agm-polyline [strokeColor]="'#000099'"
+                      [strokeWeight]="5">
+            <agm-polyline-point [latitude]="lat" [longitude]="lng"></agm-polyline-point>
+            <agm-polyline-point [latitude]="40.1475513" [longitude]="-82.9550197"></agm-polyline-point>
+        </agm-polyline>
+        -->
+    </agm-map>
+    <div #myPanel class="direction-panel"></div>
+</div>
