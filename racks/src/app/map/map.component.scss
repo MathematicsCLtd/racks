@@ -2,9 +2,10 @@
   position: absolute;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 355px;
-  height: 100%;
-  padding: 2px;
+  height: 97%;
+  padding: 10px 5px;
   overflow-y: auto;
   background-color: #fff;
   box-shadow: 2px 0 5px rgba(0,0,0,0.3);
@@ -12,6 +13,10 @@
 
   .full-width {
     width: 100%;
+  }
+
+  .search-form {
+    margin-bottom: 20px;
   }
 }
 

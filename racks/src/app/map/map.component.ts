@@ -16,7 +16,7 @@ export class MapComponent implements OnInit {
     trail: {},
     destination: {}
   };
-  zoom: number = 14;
+  zoom: number = 16;
   travelMode: string = 'BICYCLING';
   //travelMode: string = 'TRANSIT';
 
@@ -41,7 +41,7 @@ export class MapComponent implements OnInit {
   getCoordinates(req) {
     Object.keys(req).forEach(key => {
       this.gmap.getCoordinates(req[key]).subscribe(ret => {
-        if (ret.results) {
+        if (ret) {
           this.dir[key] = ret.results[0].geometry.location;
         } else {
           console.log(ret);

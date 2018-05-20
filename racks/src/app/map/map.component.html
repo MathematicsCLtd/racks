@@ -1,5 +1,6 @@
 <div class="left-menu">
     <form #directionsForm="ngForm"
+          class="search-form"
           (ngSubmit)="onSubmit()">
         <mat-form-field class="full-width">
             <input matInput required
@@ -19,7 +20,8 @@
                    placeholder="Destination"
                    [(ngModel)]="destination" name="destination">
         </mat-form-field>
-        <button mat-raised-button type="submit">GO</button>
+        <button mat-raised-button type="submit"
+                color="primary">GO</button>
     </form>
     <div #myPanel class="direction-panel"></div>
 </div>
@@ -27,6 +29,7 @@
     <agm-map [latitude]="myPos?.lat"
              [longitude]="myPos?.lng"
              [zoom]="zoom">
+        <agm-marker [latitude]="myPos.lat" [longitude]="myPos.lng"></agm-marker>
         <agm-direction *ngIf="dir"
                        [origin]="dir.origin"
                        [destination]="dir.destination"
@@ -36,7 +39,6 @@
                        [avoidHighways]="true"
                        [panel]="myPanel"></agm-direction>
         <!--
-        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
         <agm-polyline [strokeColor]="'#000099'"
                       [strokeWeight]="5">
             <agm-polyline-point [latitude]="lat" [longitude]="lng"></agm-polyline-point>
